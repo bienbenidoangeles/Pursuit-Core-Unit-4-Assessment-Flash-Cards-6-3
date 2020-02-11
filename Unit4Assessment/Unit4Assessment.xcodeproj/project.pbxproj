@@ -21,6 +21,7 @@
 		F103827D23F30522008708B4 /* SearchFlashCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103827C23F30522008708B4 /* SearchFlashCardsViewController.swift */; };
 		F103827F23F306FB008708B4 /* FlashCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103827E23F306FB008708B4 /* FlashCardsView.swift */; };
 		F103828123F3079C008708B4 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828023F3079C008708B4 /* EmptyView.swift */; };
+		F103828423F30B69008708B4 /* FlashCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828323F30B69008708B4 /* FlashCardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		F103827C23F30522008708B4 /* SearchFlashCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFlashCardsViewController.swift; sourceTree = "<group>"; };
 		F103827E23F306FB008708B4 /* FlashCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsView.swift; sourceTree = "<group>"; };
 		F103828023F3079C008708B4 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		F103828323F30B69008708B4 /* FlashCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		5790239623F2EE39000AA216 /* Unit4Assessment */ = {
 			isa = PBXGroup;
 			children = (
+				F103828223F30B3D008708B4 /* Cells */,
 				F103827723F30073008708B4 /* Model */,
 				F103827523F3003D008708B4 /* Views */,
 				F103827623F30054008708B4 /* Supportting Files */,
@@ -149,6 +152,14 @@
 				F103827823F30100008708B4 /* FlashCardModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F103828223F30B3D008708B4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F103828323F30B69008708B4 /* FlashCardCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F103828423F30B69008708B4 /* FlashCardCell.swift in Sources */,
 				F103827023F2FE64008708B4 /* FlashCardsTabBarController.swift in Sources */,
 				F103828123F3079C008708B4 /* EmptyView.swift in Sources */,
 				F103827D23F30522008708B4 /* SearchFlashCardsViewController.swift in Sources */,

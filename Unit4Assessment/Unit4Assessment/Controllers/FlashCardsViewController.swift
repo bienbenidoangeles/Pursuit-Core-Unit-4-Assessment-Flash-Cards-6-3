@@ -14,6 +14,13 @@ class FlashCardsViewController: UIViewController {
     var dataPersistance:DataPersistence<FlashCard>!
     
     let flashCardsView = FlashCardsView()
+    lazy var collectionView = flashCardsView.collectionView
+    
+    var flashCards = [FlashCard](){
+        didSet{
+            
+        }
+    }
     
     override func loadView() {
         view = flashCardsView
@@ -22,9 +29,35 @@ class FlashCardsViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
-  }
-
-
+        delegateAndDataSources()
+        collectionView.register(FlashCardCell.self, forCellWithReuseIdentifier: "FlashCardCell")
+    }
+    
+    func delegateAndDataSources(){
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
 }
 
+extension FlashCardsViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return flashCards.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FlashCardCell", for: indexPath) as? FlashCardCell else{
+            fatalError("failed to downcast to FlashCard Cell")
+        }
+        
+        let selectedFlashCard = flashCards[indexPath.row]
+        cell.configureCell(for: selectedFlashCard)
+        
+        return cell
+    }
+    
+    
+}
+
+extension FlashCardsViewController: UICollectionViewDelegateFlowLayout{
+    
+}
