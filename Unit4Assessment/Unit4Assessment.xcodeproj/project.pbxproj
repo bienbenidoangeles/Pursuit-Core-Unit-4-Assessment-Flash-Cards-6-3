@@ -22,6 +22,7 @@
 		F103827F23F306FB008708B4 /* FlashCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103827E23F306FB008708B4 /* FlashCardsView.swift */; };
 		F103828123F3079C008708B4 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828023F3079C008708B4 /* EmptyView.swift */; };
 		F103828423F30B69008708B4 /* FlashCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828323F30B69008708B4 /* FlashCardCell.swift */; };
+		F103828723F31831008708B4 /* ShowAlert+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828623F31831008708B4 /* ShowAlert+UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		F103827E23F306FB008708B4 /* FlashCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsView.swift; sourceTree = "<group>"; };
 		F103828023F3079C008708B4 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		F103828323F30B69008708B4 /* FlashCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardCell.swift; sourceTree = "<group>"; };
+		F103828623F31831008708B4 /* ShowAlert+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowAlert+UIViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		5790239623F2EE39000AA216 /* Unit4Assessment */ = {
 			isa = PBXGroup;
 			children = (
+				F103828523F31814008708B4 /* Extensions */,
 				F103828223F30B3D008708B4 /* Cells */,
 				F103827723F30073008708B4 /* Model */,
 				F103827523F3003D008708B4 /* Views */,
@@ -160,6 +163,14 @@
 				F103828323F30B69008708B4 /* FlashCardCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		F103828523F31814008708B4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F103828623F31831008708B4 /* ShowAlert+UIViewController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +288,7 @@
 				F103827923F30100008708B4 /* FlashCardModel.swift in Sources */,
 				F103827B23F304D5008708B4 /* CreateFlashCardsViewController.swift in Sources */,
 				F103827F23F306FB008708B4 /* FlashCardsView.swift in Sources */,
+				F103828723F31831008708B4 /* ShowAlert+UIViewController.swift in Sources */,
 				5790239823F2EE39000AA216 /* AppDelegate.swift in Sources */,
 				5790239A23F2EE39000AA216 /* SceneDelegate.swift in Sources */,
 			);

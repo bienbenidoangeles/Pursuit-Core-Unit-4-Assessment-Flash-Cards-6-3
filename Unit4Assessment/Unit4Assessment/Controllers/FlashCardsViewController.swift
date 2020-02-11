@@ -51,6 +51,7 @@ extension FlashCardsViewController: UICollectionViewDataSource{
         
         let selectedFlashCard = flashCards[indexPath.row]
         cell.configureCell(for: selectedFlashCard)
+        cell.delegate = self
         
         return cell
     }
@@ -60,4 +61,29 @@ extension FlashCardsViewController: UICollectionViewDataSource{
 
 extension FlashCardsViewController: UICollectionViewDelegateFlowLayout{
     
+}
+
+extension FlashCardsViewController: FlashCardButtonDelegate{
+    func moreButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
+        let actionSheet = UIAlertController(title: "What would you like to do?", message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete \(flashCard.cardTitle)?", style: .destructive) { (alertAction) in
+            self.deleteFlashCard(flashCard)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let actions = [deleteAction, cancelAction]
+        actions.forEach { actionSheet.addAction($0)}
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func deleteFlashCard(_ flashCard: FlashCard){
+        guard let index = flashCards.firstIndex(of: flashCard) else {
+            return
+        }
+        
+        do {
+            try dataPersistance.deleteItem(at: index)
+        } catch {
+            showAlert(title: "DELETE ERROR", message: "Error: \(error)")
+        }
+    }
 }
