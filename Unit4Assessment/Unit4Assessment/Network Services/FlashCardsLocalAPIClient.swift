@@ -14,7 +14,7 @@ public enum ServiceError: Error {
   case decodingError(Error)
 }
 
-final class FlashCardsService {
+class LocalFlashCardsService {
   public static func fetchStocks() throws -> [LocalFlashCards] {
     guard let path = Bundle.main.path(forResource: "localJSONData", ofType: "json") else {
       throw ServiceError.resourcePathDoesNotExist

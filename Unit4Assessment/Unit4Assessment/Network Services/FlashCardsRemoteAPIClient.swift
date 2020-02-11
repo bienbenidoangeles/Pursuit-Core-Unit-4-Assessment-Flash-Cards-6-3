@@ -25,7 +25,7 @@ class RemoteFlashCardsHelper {
             case.failure(let appError):
                 completion(.failure(.networkClientError(appError)))
                 do{
-                    let offlineFlashCards = try FlashCardsService.fetchStocks()
+                    let offlineFlashCards = try LocalFlashCardsService.fetchStocks()
                     let convertedFlashCards =  offlineFlashCards.map{FlashCard(cardTitle: $0.quizTitle, facts: $0.facts, type: .remote)}
                     completion(.success(convertedFlashCards))
                 } catch {
