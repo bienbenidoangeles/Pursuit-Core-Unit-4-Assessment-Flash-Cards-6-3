@@ -18,11 +18,15 @@ class CreateFlashCardsView: UIView {
     
     lazy var topTextView: UITextView = {
         let textView = UITextView()
+        textView.text = "Enter flashcard fact"
+        textView.textColor = UIColor.lightGray
         return textView
     }()
     
     lazy var bottomTextView: UITextView = {
         let textView = UITextView()
+        textView.text = "Enter flashcard fact"
+        textView.textColor = UIColor.lightGray
         return textView
     }()
     

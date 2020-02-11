@@ -80,6 +80,13 @@ extension CreateFlashCardsViewController: UITextViewDelegate{
             textView.textColor = UIColor.black
         }
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" && textView.textColor == UIColor.black {
+            textView.text = "Enter flashcard fact"
+            textView.textColor = UIColor.lightGray
+        }
+    }
 }
 
 
