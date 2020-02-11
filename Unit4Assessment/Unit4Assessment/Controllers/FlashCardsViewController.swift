@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import DataPersistence
 
-class ViewController: UIViewController {
+class FlashCardsViewController: UIViewController {
+    
+    var dataPersistance:DataPersistence<FlashCard>!
+    
+    let flashCardsView = FlashCardsView()
+    
+    override func loadView() {
+        view = flashCardsView
+    }
+    
 
   override func viewDidLoad() {
     super.viewDidLoad()
