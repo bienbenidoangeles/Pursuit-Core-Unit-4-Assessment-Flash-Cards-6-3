@@ -37,11 +37,20 @@ class FlashCardsViewController: UIViewController {
         delegateAndDataSources()
         collectionView.register(FlashCardCell.self, forCellWithReuseIdentifier: "FlashCardCell")
         view.backgroundColor = .systemBackground
+        loadSavedArticles()
     }
     
     func delegateAndDataSources(){
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    func loadSavedArticles(){
+        do{
+            flashCards = try dataPersistence.loadItems()
+        } catch {
+            showAlert(title: "Loading error", message: "Error: \(error)")
+        }
     }
 }
 
@@ -104,10 +113,10 @@ extension FlashCardsViewController: FlashCardButtonDelegate{
 
 extension FlashCardsViewController: DataPersistenceDelegate{
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        
+        loadSavedArticles()
     }
     
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        
+        loadSavedArticles()
     }
 }
