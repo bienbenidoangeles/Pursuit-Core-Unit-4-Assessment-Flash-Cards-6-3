@@ -20,5 +20,5 @@ struct FlashCardTopLevelData: Codable & Equatable {
 struct FlashCard: Codable & Equatable {
     let cardTitle: String
     let facts: [String]
-    let type: FlashCardState?
+    var type: FlashCardState?
 }

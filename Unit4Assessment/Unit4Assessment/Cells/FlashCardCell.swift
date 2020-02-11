@@ -101,12 +101,14 @@ class FlashCardCell: UICollectionViewCell {
     }
     
     public func buttonState(isAddButtonEnabled value: Bool){
-        addButton.isEnabled = value
         addButton.isHidden = value
-        addButton.isUserInteractionEnabled = value
-        editButton.isEnabled = !value
+        //addButton.isEnabled = value
+        //addButton.isUserInteractionEnabled = value
+        print("addButton isHidden", value)
         editButton.isHidden = !value
-        editButton.isUserInteractionEnabled = !value
+        //editButton.isEnabled = !value
+        //editButton.isUserInteractionEnabled = !value
+        print("editButton isHidden", !value)
     }
 
     public func configureCell(for card: FlashCard){
@@ -114,14 +116,16 @@ class FlashCardCell: UICollectionViewCell {
         guard let existingFlashCardState = existingFlashCard.type else {
             fatalError("Card does not have a type")
         }
+        
+        print(existingFlashCardState)
         if existingFlashCardState == .local{
-            buttonState(isAddButtonEnabled: false)
-        } else if existingFlashCardState == .remote{
             buttonState(isAddButtonEnabled: true)
+        } else if existingFlashCardState == .remote{
+            buttonState(isAddButtonEnabled: false)
         }
         
         titleLabel.text = card.cardTitle
-        factLabel.text = card.facts.joined(separator: ".\n")
+        factLabel.text = card.facts.joined(separator: "\n")
     }
             
     override init(frame: CGRect) {
@@ -137,6 +141,7 @@ class FlashCardCell: UICollectionViewCell {
     private func commonInit(){
         addGestureRecognizer(longPressGesture)
         setupEditButtonConstrainsts()
+        setupAddButtonConstrainsts()
         setupTitleLabelConstrainsts()
         setupFactsLabelConstrainsts()
     }
@@ -152,11 +157,23 @@ class FlashCardCell: UICollectionViewCell {
         ])
     }
     
+    private func setupAddButtonConstrainsts(){
+        addSubview(addButton)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            addButton.topAnchor.constraint(equalTo: topAnchor),
+            addButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            addButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
+            addButton.widthAnchor.constraint(equalTo: addButton.heightAnchor)
+        ])
+    }
+    
     private func setupTitleLabelConstrainsts(){
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: editButton.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: addButton.bottomAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -168,6 +185,7 @@ class FlashCardCell: UICollectionViewCell {
         factLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             factLabel.topAnchor.constraint(equalTo: editButton.bottomAnchor),
+            factLabel.topAnchor.constraint(equalTo: addButton.bottomAnchor),
             factLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             factLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             factLabel.bottomAnchor.constraint(equalTo: bottomAnchor)

@@ -48,6 +48,7 @@ class FlashCardsViewController: UIViewController {
     func loadSavedArticles(){
         do{
             flashCards = try dataPersistence.loadItems()
+            print(flashCards)
         } catch {
             showAlert(title: "Loading error", message: "Error: \(error)")
         }
@@ -65,6 +66,7 @@ extension FlashCardsViewController: UICollectionViewDataSource{
         }
         
         let selectedFlashCard = flashCards[indexPath.row]
+        //selectedFlashCard.type! = .local
         cell.configureCell(for: selectedFlashCard)
         cell.delegate = self
         cell.backgroundColor = .systemBackground
@@ -106,6 +108,8 @@ extension FlashCardsViewController: FlashCardButtonDelegate{
         guard let index = flashCards.firstIndex(of: flashCard) else {
             return
         }
+        
+        print(index)
         
         do {
             try dataPersistence.deleteItem(at: index)

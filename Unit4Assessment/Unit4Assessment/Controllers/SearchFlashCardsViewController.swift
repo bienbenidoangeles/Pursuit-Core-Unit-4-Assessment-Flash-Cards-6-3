@@ -19,7 +19,16 @@ class SearchFlashCardsViewController: UIViewController {
     
     private var remoteFlashCards = [FlashCard](){
         didSet{
-            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+            if remoteFlashCards.isEmpty{
+                collectionView.backgroundView = EmptyView(title: "Remote Flash Cards", message: "No flash cards have been found on the internet. Why not create some?")
+            } else {
+                DispatchQueue.main.async {
+                    self.collectionView.backgroundView = nil
+                }
+            }
         }
     }
     
@@ -31,11 +40,21 @@ class SearchFlashCardsViewController: UIViewController {
         super.viewDidLoad()
         delegatesAndDataSources()
         collectionView.register(FlashCardCell.self, forCellWithReuseIdentifier: "remoteFlashCardCell")
-
+        loadRemoteFlashCards()
+        view.backgroundColor = .systemBackground
     }
     
-    private func loadRemoteCells(){
-        
+    private func loadRemoteFlashCards(){
+        RemoteFlashCardsHelper.getRemoteFlashCards { (result) in
+            switch result{
+            case .failure(let appError):
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Network Client Error", message: "Error: \(appError)")
+                }
+            case .success(let flashCards):
+                self.remoteFlashCards = flashCards
+            }
+        }
     }
     
     private func delegatesAndDataSources(){
@@ -82,11 +101,18 @@ extension SearchFlashCardsViewController: FlashCardButtonDelegate{
     }
     
     func addButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
+        guard let indexPath = collectionView.indexPath(for: collectionViewCell) else {
+            return
+        }
         
-//        do {
-//            try dataPersistence.createItem()
-//        } catch{
-//            showAlert(title: "SAVING ERROR", message: <#T##String?#>)
-//        }
+        var selectedFlashcard = remoteFlashCards[indexPath.row]
+        selectedFlashcard.type! = .local
+        showAlert(title: "Item was added", message: "Flashcard: \(selectedFlashcard.cardTitle) was added to your deck")
+        
+        do {
+            try dataPersistence.createItem(selectedFlashcard)
+        } catch{
+            showAlert(title: "SAVING ERROR", message: "Error: \(error)")
+        }
     }
 }
