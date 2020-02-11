@@ -11,7 +11,7 @@ import DataPersistence
 
 class FlashCardsViewController: UIViewController {
     
-    var dataPersistance:DataPersistence<FlashCard>!
+    var dataPersistence:DataPersistence<FlashCard>!
     
     let flashCardsView = FlashCardsView()
     lazy var collectionView = flashCardsView.collectionView
@@ -19,6 +19,11 @@ class FlashCardsViewController: UIViewController {
     var flashCards = [FlashCard](){
         didSet{
             collectionView.reloadData()
+            if flashCards.isEmpty{
+                collectionView.backgroundView = EmptyView(title: "Flash Cards", message: "No flash cards have been saved. Why not browse some from the net?")
+            } else {
+                collectionView.backgroundView = nil
+            }
         }
     }
     
@@ -31,6 +36,7 @@ class FlashCardsViewController: UIViewController {
     super.viewDidLoad()
         delegateAndDataSources()
         collectionView.register(FlashCardCell.self, forCellWithReuseIdentifier: "FlashCardCell")
+        view.backgroundColor = .systemBackground
     }
     
     func delegateAndDataSources(){
@@ -89,7 +95,7 @@ extension FlashCardsViewController: FlashCardButtonDelegate{
         }
         
         do {
-            try dataPersistance.deleteItem(at: index)
+            try dataPersistence.deleteItem(at: index)
         } catch {
             showAlert(title: "DELETE ERROR", message: "Error: \(error)")
         }

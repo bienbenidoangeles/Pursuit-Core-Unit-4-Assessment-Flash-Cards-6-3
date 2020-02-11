@@ -16,14 +16,14 @@ class FlashCardsTabBarController: UITabBarController {
     lazy var flashCardsViewController: FlashCardsViewController = {
         let viewController = FlashCardsViewController()
         viewController.tabBarItem = UITabBarItem(title: "Cards", image: UIImage(systemName: "questionmark.circle"), tag: 0)
-        viewController.dataPersistance = dataPersistence
+        viewController.dataPersistence = dataPersistence
         return viewController
     }()
     
     lazy var createFlashCardsViewController: CreateFlashCardsViewController = {
         let viewController = CreateFlashCardsViewController()
         viewController.tabBarItem = UITabBarItem(title: "Create", image: UIImage(systemName: "square.and.pencil"), tag: 1)
-        viewController.dataPersistance = dataPersistence
+        viewController.dataPersistence = dataPersistence
         return viewController
     }()
     
