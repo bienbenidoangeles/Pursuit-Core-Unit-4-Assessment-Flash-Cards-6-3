@@ -19,6 +19,7 @@ class FlashCardCell: UICollectionViewCell {
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -27,6 +28,7 @@ class FlashCardCell: UICollectionViewCell {
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -35,6 +37,12 @@ class FlashCardCell: UICollectionViewCell {
         editButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
         return editButton
+    }()
+    
+    lazy var tapGesture: UITapGestureRecognizer = {
+       let gesture = UITapGestureRecognizer()
+        gesture.addTarget(self, action: #selector(cellWasTapped))
+        return gesture
     }()
     
     var existingFlashCard: FlashCard!
@@ -48,6 +56,30 @@ class FlashCardCell: UICollectionViewCell {
         delegate.moreButtonPressed(self, flashCard: existingFlashCard)
     }
     
+    @objc private func cellWasTapped(_ gesture: UITapGestureRecognizer){
+        if gesture.state == .began || gesture.state == .changed {
+            return
+        }
+        isBackOfCardShowing.toggle()
+        animate()
+    }
+    
+    private func animate(){
+        let duration = 1.0
+        
+        if isBackOfCardShowing {
+            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromRight], animations: {
+                self.factLabel.alpha = 1
+                self.titleLabel.alpha = 0
+            }, completion: nil)
+        } else {
+            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
+                self.factLabel.alpha = 0
+                self.titleLabel.alpha = 1
+            }, completion: nil)
+        }
+    }
+
     public func configureCell(for card: FlashCard){
         existingFlashCard = card
         titleLabel.text = card.cardTitle
@@ -68,23 +100,6 @@ class FlashCardCell: UICollectionViewCell {
         setupEditButtonConstrainsts()
         setupTitleLabelConstrainsts()
         setupFactsLabelConstrainsts()
-    }
-    
-    private func animate(){
-        let duration = 1.0
-        
-        if isBackOfCardShowing {
-            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromRight], animations: {
-                self.factLabel.alpha = 1
-                self.titleLabel.alpha = 0
-            }, completion: nil)
-        } else {
-            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
-                self.factLabel.alpha = 0
-                self.titleLabel.alpha = 1
-            }, completion: nil)
-        }
-        
     }
     
     private func setupEditButtonConstrainsts(){
