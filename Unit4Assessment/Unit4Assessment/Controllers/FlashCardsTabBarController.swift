@@ -17,6 +17,7 @@ class FlashCardsTabBarController: UITabBarController {
         let viewController = FlashCardsViewController()
         viewController.tabBarItem = UITabBarItem(title: "Cards", image: UIImage(systemName: "questionmark.circle"), tag: 0)
         viewController.dataPersistence = dataPersistence
+        viewController.dataPersistence.delegate = viewController
         return viewController
     }()
     
