@@ -24,6 +24,7 @@
 		F103828423F30B69008708B4 /* FlashCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828323F30B69008708B4 /* FlashCardCell.swift */; };
 		F103828723F31831008708B4 /* ShowAlert+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828623F31831008708B4 /* ShowAlert+UIViewController.swift */; };
 		F103828923F31C6D008708B4 /* CreateFlashCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828823F31C6D008708B4 /* CreateFlashCardsView.swift */; };
+		F103828B23F3428F008708B4 /* SearchFlashCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103828A23F3428E008708B4 /* SearchFlashCardsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		F103828323F30B69008708B4 /* FlashCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardCell.swift; sourceTree = "<group>"; };
 		F103828623F31831008708B4 /* ShowAlert+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowAlert+UIViewController.swift"; sourceTree = "<group>"; };
 		F103828823F31C6D008708B4 /* CreateFlashCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFlashCardsView.swift; sourceTree = "<group>"; };
+		F103828A23F3428E008708B4 /* SearchFlashCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFlashCardsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				F103827E23F306FB008708B4 /* FlashCardsView.swift */,
+				F103828A23F3428E008708B4 /* SearchFlashCardsView.swift */,
 				F103828823F31C6D008708B4 /* CreateFlashCardsView.swift */,
 				F103828023F3079C008708B4 /* EmptyView.swift */,
 			);
@@ -285,6 +288,7 @@
 			files = (
 				F103828423F30B69008708B4 /* FlashCardCell.swift in Sources */,
 				F103827023F2FE64008708B4 /* FlashCardsTabBarController.swift in Sources */,
+				F103828B23F3428F008708B4 /* SearchFlashCardsView.swift in Sources */,
 				F103828123F3079C008708B4 /* EmptyView.swift in Sources */,
 				F103827D23F30522008708B4 /* SearchFlashCardsViewController.swift in Sources */,
 				5790239C23F2EE39000AA216 /* FlashCardsViewController.swift in Sources */,
