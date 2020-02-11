@@ -18,7 +18,7 @@ class FlashCardsViewController: UIViewController {
     
     var flashCards = [FlashCard](){
         didSet{
-            
+            collectionView.reloadData()
         }
     }
     
@@ -60,7 +60,15 @@ extension FlashCardsViewController: UICollectionViewDataSource{
 }
 
 extension FlashCardsViewController: UICollectionViewDelegateFlowLayout{
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let maxSize:CGSize = UIScreen.main.bounds.size
+        let spacingBetweenItems: CGFloat = 10
+        let numberOfItems:CGFloat = 1
+        let itemHeight:CGFloat = maxSize.height * 0.3
+        let totalSpacing: CGFloat = (2 * spacingBetweenItems) + (numberOfItems - 1) * spacingBetweenItems
+        let itemWidth: CGFloat = (maxSize.width - totalSpacing) / numberOfItems
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
 }
 
 extension FlashCardsViewController: FlashCardButtonDelegate{

@@ -13,23 +13,23 @@ class FlashCardsTabBarController: UITabBarController {
     
     var dataPersistence = DataPersistence<FlashCard>(filename: "SavedFlashCards.plist")
     
-    lazy var flashCardsViewController: UIViewController = {
+    lazy var flashCardsViewController: FlashCardsViewController = {
         let viewController = FlashCardsViewController()
         viewController.tabBarItem = UITabBarItem(title: "Cards", image: UIImage(systemName: "questionmark.circle"), tag: 0)
         viewController.dataPersistance = dataPersistence
         return viewController
     }()
     
-    lazy var createFlashCardsViewController: UIViewController = {
+    lazy var createFlashCardsViewController: CreateFlashCardsViewController = {
         let viewController = CreateFlashCardsViewController()
         viewController.tabBarItem = UITabBarItem(title: "Create", image: UIImage(systemName: "square.and.pencil"), tag: 1)
         viewController.dataPersistance = dataPersistence
         return viewController
     }()
     
-    lazy var searchFlashCardsViewController: UIViewController = {
+    lazy var searchFlashCardsViewController: SearchFlashCardsViewController = {
         let viewController = SearchFlashCardsViewController()
-        viewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingGlass"), tag: 2)
+        viewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
         viewController.dataPersistence = dataPersistence
         return viewController
     }()
@@ -37,6 +37,7 @@ class FlashCardsTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let baseVCs = [flashCardsViewController, createFlashCardsViewController, searchFlashCardsViewController]
+        //viewControllers = baseVCs
         viewControllers = baseVCs.map{UINavigationController(rootViewController: $0)}
     }
     
