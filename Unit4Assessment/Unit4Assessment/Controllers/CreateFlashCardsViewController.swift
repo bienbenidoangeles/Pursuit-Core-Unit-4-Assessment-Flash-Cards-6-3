@@ -41,18 +41,13 @@ class CreateFlashCardsViewController: UIViewController {
     
     @objc
     private func createButtonPressed(_ sender: UIBarButtonItem){
-        guard let title = titleTextField.text else {
-            showAlert(title: "Missing Fields", message: "No Title was entered")
+
+        guard ((!(titleTextField.text!.isEmpty)  &&  !(factTopTextView.text!.isEmpty || factTopTextView.text == "Enter flashcard fact") && !(factBottomTextView.text!.isEmpty || factBottomTextView.text == "Enter flashcard fact"))) else {
+            showAlert(title: "Missing Fields", message: "One or more field are missing. Make sure none are empty")
             return
         }
         
-        guard let fact1 = factTopTextView.text else {
-            showAlert(title: "Missing Fields", message: "Fact 1 was not entered")
-            return
-        }
-        
-        guard let fact2 = factBottomTextView.text else {
-            showAlert(title: "Missing Fields", message: "Fact 2 was not entered")
+        guard let title = titleTextField.text, let fact1 = factTopTextView.text, let fact2 = factBottomTextView.text else {
             return
         }
         

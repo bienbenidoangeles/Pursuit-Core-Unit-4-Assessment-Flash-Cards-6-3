@@ -39,9 +39,9 @@ class FlashCardCell: UICollectionViewCell {
         return editButton
     }()
     
-    lazy var tapGesture: UITapGestureRecognizer = {
-       let gesture = UITapGestureRecognizer()
-        gesture.addTarget(self, action: #selector(cellWasTapped))
+    lazy var longPressGesture: UILongPressGestureRecognizer = {
+       let gesture = UILongPressGestureRecognizer()
+        gesture.addTarget(self, action: #selector(cellWasLongPressed))
         return gesture
     }()
     
@@ -56,7 +56,7 @@ class FlashCardCell: UICollectionViewCell {
         delegate.moreButtonPressed(self, flashCard: existingFlashCard)
     }
     
-    @objc private func cellWasTapped(_ gesture: UITapGestureRecognizer){
+    @objc private func cellWasLongPressed(_ gesture: UITapGestureRecognizer){
         if gesture.state == .began || gesture.state == .changed {
             return
         }
