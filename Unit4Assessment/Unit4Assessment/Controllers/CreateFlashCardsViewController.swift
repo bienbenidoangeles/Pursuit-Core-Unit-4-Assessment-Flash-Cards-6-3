@@ -51,7 +51,7 @@ class CreateFlashCardsViewController: UIViewController {
             return
         }
         
-        flashCard = FlashCard(cardTitle: title, facts: [fact1, fact2])
+        flashCard = FlashCard(cardTitle: title, facts: [fact1, fact2], type: .local)
         
         if dataPersistence.hasItemBeenSaved(flashCard){
             showAlert(title: "Dupicated Flashcards", message: "Create a unique flash card")

@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct LocalFlashCards: Codable & Equatable {
+    let quizTitle: String
+    let facts: [String]
+}
+
 struct FlashCardTopLevelData: Codable & Equatable {
     let cards: [FlashCard]
 }
@@ -15,4 +20,5 @@ struct FlashCardTopLevelData: Codable & Equatable {
 struct FlashCard: Codable & Equatable {
     let cardTitle: String
     let facts: [String]
+    let type: FlashCardState?
 }

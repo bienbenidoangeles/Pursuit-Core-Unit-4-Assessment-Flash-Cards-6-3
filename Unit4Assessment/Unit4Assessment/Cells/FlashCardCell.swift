@@ -10,6 +10,12 @@ import UIKit
 
 protocol FlashCardButtonDelegate: AnyObject {
     func moreButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard)
+    func addButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard)
+}
+
+enum FlashCardState: String, Codable {
+    case local
+    case remote
 }
 
 class FlashCardCell: UICollectionViewCell {
@@ -40,6 +46,13 @@ class FlashCardCell: UICollectionViewCell {
         return editButton
     }()
     
+    lazy var addButton: UIButton = {
+        let addButton = UIButton()
+        addButton.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+        addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        return addButton
+    }()
+    
     lazy var longPressGesture: UILongPressGestureRecognizer = {
        let gesture = UILongPressGestureRecognizer()
         gesture.addTarget(self, action: #selector(cellWasLongPressed(_:)))
@@ -55,6 +68,11 @@ class FlashCardCell: UICollectionViewCell {
     @objc
     private func editButtonPressed(){
         delegate.moreButtonPressed(self, flashCard: existingFlashCard)
+    }
+    
+    @objc
+    private func addButtonPressed(){
+        delegate.addButtonPressed(self, flashCard: existingFlashCard)
     }
     
     @objc private func cellWasLongPressed(_ gesture: UILongPressGestureRecognizer){
@@ -81,9 +99,27 @@ class FlashCardCell: UICollectionViewCell {
             }, completion: nil)
         }
     }
+    
+    public func buttonState(isAddButtonEnabled value: Bool){
+        addButton.isEnabled = value
+        addButton.isHidden = value
+        addButton.isUserInteractionEnabled = value
+        editButton.isEnabled = !value
+        editButton.isHidden = !value
+        editButton.isUserInteractionEnabled = !value
+    }
 
     public func configureCell(for card: FlashCard){
         existingFlashCard = card
+        guard let existingFlashCardState = existingFlashCard.type else {
+            fatalError("Card does not have a type")
+        }
+        if existingFlashCardState == .local{
+            buttonState(isAddButtonEnabled: false)
+        } else if existingFlashCardState == .remote{
+            buttonState(isAddButtonEnabled: true)
+        }
+        
         titleLabel.text = card.cardTitle
         factLabel.text = card.facts.joined(separator: ".\n")
     }

@@ -87,6 +87,10 @@ extension FlashCardsViewController: UICollectionViewDelegateFlowLayout{
 }
 
 extension FlashCardsViewController: FlashCardButtonDelegate{
+    func addButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
+        
+    }
+    
     func moreButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
         let actionSheet = UIAlertController(title: "What would you like to do?", message: nil, preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete \(flashCard.cardTitle)?", style: .destructive) { (alertAction) in
