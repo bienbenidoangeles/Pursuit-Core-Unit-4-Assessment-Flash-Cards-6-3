@@ -28,6 +28,7 @@ class FlashCardCell: UICollectionViewCell {
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.alpha = 0
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -41,7 +42,7 @@ class FlashCardCell: UICollectionViewCell {
     
     lazy var longPressGesture: UILongPressGestureRecognizer = {
        let gesture = UILongPressGestureRecognizer()
-        gesture.addTarget(self, action: #selector(cellWasLongPressed))
+        gesture.addTarget(self, action: #selector(cellWasLongPressed(_:)))
         return gesture
     }()
     
@@ -56,10 +57,11 @@ class FlashCardCell: UICollectionViewCell {
         delegate.moreButtonPressed(self, flashCard: existingFlashCard)
     }
     
-    @objc private func cellWasLongPressed(_ gesture: UITapGestureRecognizer){
+    @objc private func cellWasLongPressed(_ gesture: UILongPressGestureRecognizer){
         if gesture.state == .began || gesture.state == .changed {
             return
         }
+
         isBackOfCardShowing.toggle()
         animate()
     }
@@ -83,7 +85,7 @@ class FlashCardCell: UICollectionViewCell {
     public func configureCell(for card: FlashCard){
         existingFlashCard = card
         titleLabel.text = card.cardTitle
-        factLabel.text = card.facts.joined(separator: ". ")
+        factLabel.text = card.facts.joined(separator: ".\n")
     }
             
     override init(frame: CGRect) {
@@ -97,6 +99,7 @@ class FlashCardCell: UICollectionViewCell {
     }
     
     private func commonInit(){
+        addGestureRecognizer(longPressGesture)
         setupEditButtonConstrainsts()
         setupTitleLabelConstrainsts()
         setupFactsLabelConstrainsts()
@@ -108,7 +111,7 @@ class FlashCardCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             editButton.topAnchor.constraint(equalTo: topAnchor),
             editButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            editButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
+            editButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
             editButton.widthAnchor.constraint(equalTo: editButton.heightAnchor)
         ])
     }

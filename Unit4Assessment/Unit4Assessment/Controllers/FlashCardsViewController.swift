@@ -67,7 +67,7 @@ extension FlashCardsViewController: UICollectionViewDataSource{
         let selectedFlashCard = flashCards[indexPath.row]
         cell.configureCell(for: selectedFlashCard)
         cell.delegate = self
-        
+        cell.backgroundColor = .systemBackground
         return cell
     }
     
