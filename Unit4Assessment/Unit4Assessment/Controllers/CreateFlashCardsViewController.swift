@@ -50,7 +50,7 @@ class CreateFlashCardsViewController: UIViewController {
     private func createButtonPressed(_ sender: UIBarButtonItem){
 
         guard ((!(titleTextField.text!.isEmpty)  &&  !(factTopTextView.text!.isEmpty || factTopTextView.text == "Enter flashcard fact") && !(factBottomTextView.text!.isEmpty || factBottomTextView.text == "Enter flashcard fact"))) else {
-            showAlert(title: "Missing Fields", message: "One or more field are missing. Make sure none are empty")
+            showAlert(title: "Missing Fields", message: "One or more field(s) are missing. Make sure none are empty")
             return
         }
         
@@ -59,7 +59,6 @@ class CreateFlashCardsViewController: UIViewController {
         }
 
         flashCard = FlashCard(cardTitle: title, facts: [fact1, fact2], type: .local)
-        //dismissKeyboard()
 
         if dataPersistence.hasItemBeenSaved(flashCard){
             showAlert(title: "Dupicated Flashcards", message: "Create a unique flash card")

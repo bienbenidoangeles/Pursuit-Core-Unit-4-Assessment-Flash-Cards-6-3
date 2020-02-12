@@ -28,6 +28,7 @@
 		F103829023F34DF1008708B4 /* localJSONData.json in Resources */ = {isa = PBXBuildFile; fileRef = F103828F23F34DF1008708B4 /* localJSONData.json */; };
 		F103829323F34E49008708B4 /* FlashCardsRemoteAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103829223F34E49008708B4 /* FlashCardsRemoteAPIClient.swift */; };
 		F103829523F34E60008708B4 /* FlashCardsLocalAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103829423F34E60008708B4 /* FlashCardsLocalAPIClient.swift */; };
+		F103829723F3E1DF008708B4 /* CapitalizeFirstLetter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F103829623F3E1DF008708B4 /* CapitalizeFirstLetter+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		F103828F23F34DF1008708B4 /* localJSONData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = localJSONData.json; sourceTree = "<group>"; };
 		F103829223F34E49008708B4 /* FlashCardsRemoteAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsRemoteAPIClient.swift; sourceTree = "<group>"; };
 		F103829423F34E60008708B4 /* FlashCardsLocalAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsLocalAPIClient.swift; sourceTree = "<group>"; };
+		F103829623F3E1DF008708B4 /* CapitalizeFirstLetter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CapitalizeFirstLetter+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				F103828623F31831008708B4 /* ShowAlert+UIViewController.swift */,
+				F103829623F3E1DF008708B4 /* CapitalizeFirstLetter+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				F103827923F30100008708B4 /* FlashCardModel.swift in Sources */,
 				F103827B23F304D5008708B4 /* CreateFlashCardsViewController.swift in Sources */,
 				F103829323F34E49008708B4 /* FlashCardsRemoteAPIClient.swift in Sources */,
+				F103829723F3E1DF008708B4 /* CapitalizeFirstLetter+Extensions.swift in Sources */,
 				F103828923F31C6D008708B4 /* CreateFlashCardsView.swift in Sources */,
 				F103827F23F306FB008708B4 /* FlashCardsView.swift in Sources */,
 				F103828723F31831008708B4 /* ShowAlert+UIViewController.swift in Sources */,

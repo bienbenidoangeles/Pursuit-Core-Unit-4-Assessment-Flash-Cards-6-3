@@ -48,7 +48,7 @@ class FlashCardsViewController: UIViewController {
     func loadSavedArticles(){
         do{
             flashCards = try dataPersistence.loadItems()
-            print(flashCards)
+            //print(flashCards)
         } catch {
             showAlert(title: "Loading error", message: "Error: \(error)")
         }
@@ -89,9 +89,9 @@ extension FlashCardsViewController: UICollectionViewDelegateFlowLayout{
 }
 
 extension FlashCardsViewController: FlashCardButtonDelegate{
-    func addButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
-        
-    }
+//    func addButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
+//        
+//    }
     
     func moreButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
         let actionSheet = UIAlertController(title: "What would you like to do?", message: nil, preferredStyle: .actionSheet)
@@ -109,7 +109,7 @@ extension FlashCardsViewController: FlashCardButtonDelegate{
             return
         }
         
-        print(index)
+        //print(index)
         
         do {
             try dataPersistence.deleteItem(at: index)

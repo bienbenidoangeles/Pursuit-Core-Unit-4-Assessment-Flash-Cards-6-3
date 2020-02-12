@@ -97,10 +97,6 @@ extension SearchFlashCardsViewController: UICollectionViewDelegateFlowLayout{
 
 extension SearchFlashCardsViewController: FlashCardButtonDelegate{
     func moreButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
-        
-    }
-    
-    func addButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
         guard let indexPath = collectionView.indexPath(for: collectionViewCell) else {
             return
         }
@@ -121,4 +117,8 @@ extension SearchFlashCardsViewController: FlashCardButtonDelegate{
             }
         }
     }
+    
+//    func addButtonPressed(_ collectionViewCell: FlashCardCell, flashCard: FlashCard) {
+//
+//    }
 }
