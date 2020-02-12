@@ -21,4 +21,8 @@ struct FlashCard: Codable & Equatable {
     let cardTitle: String
     let facts: [String]
     var type: FlashCardState?
+    
+    static func ==(lhs: FlashCard, rhs: FlashCard)-> Bool{
+        return lhs.cardTitle == rhs.cardTitle
+    }
 }
