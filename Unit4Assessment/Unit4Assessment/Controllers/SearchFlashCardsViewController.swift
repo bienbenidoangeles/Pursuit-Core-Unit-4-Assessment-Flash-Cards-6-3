@@ -45,14 +45,14 @@ class SearchFlashCardsViewController: UIViewController {
     }
     
     private func loadRemoteFlashCards(){
-        RemoteFlashCardsHelper.getRemoteFlashCards { (result) in
+        RemoteFlashCardsHelper.getRemoteFlashCards {[weak self] (result) in
             switch result{
             case .failure(let appError):
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Network Client Error", message: "Error: \(appError)")
+                    self?.showAlert(title: "Network Client Error", message: "Error: \(appError)")
                 }
             case .success(let flashCards):
-                self.remoteFlashCards = flashCards
+                self?.remoteFlashCards = flashCards
             }
         }
     }
