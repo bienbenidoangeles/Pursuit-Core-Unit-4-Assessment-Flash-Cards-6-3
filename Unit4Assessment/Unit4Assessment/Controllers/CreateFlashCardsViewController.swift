@@ -15,6 +15,7 @@ class CreateFlashCardsViewController: UIViewController {
     lazy var titleTextField = createFlashCardsView.textField
     lazy var factTopTextView = createFlashCardsView.topTextView
     lazy var factBottomTextView = createFlashCardsView.bottomTextView
+    
 
     var dataPersistence:DataPersistence<FlashCard>!
     
@@ -28,6 +29,8 @@ class CreateFlashCardsViewController: UIViewController {
         super.viewDidLoad()
         delegatesAndDataSources()
         addBarButtonItems()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        self.createFlashCardsView.addGestureRecognizer(tapGesture)
     }
     
     private func delegatesAndDataSources(){
@@ -37,6 +40,10 @@ class CreateFlashCardsViewController: UIViewController {
     
     private func addBarButtonItems(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(createButtonPressed))
+    }
+    
+    @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer){
+        view.endEditing(true)
     }
     
     @objc
@@ -50,9 +57,10 @@ class CreateFlashCardsViewController: UIViewController {
         guard let title = titleTextField.text, let fact1 = factTopTextView.text, let fact2 = factBottomTextView.text else {
             return
         }
-        
+
         flashCard = FlashCard(cardTitle: title, facts: [fact1, fact2], type: .local)
-        
+        //dismissKeyboard()
+
         if dataPersistence.hasItemBeenSaved(flashCard){
             showAlert(title: "Dupicated Flashcards", message: "Create a unique flash card")
         } else {

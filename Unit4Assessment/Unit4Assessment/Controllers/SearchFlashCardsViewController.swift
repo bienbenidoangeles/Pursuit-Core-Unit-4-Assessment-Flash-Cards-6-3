@@ -107,12 +107,18 @@ extension SearchFlashCardsViewController: FlashCardButtonDelegate{
         
         var selectedFlashcard = remoteFlashCards[indexPath.row]
         selectedFlashcard.type! = .local
-        showAlert(title: "Item was added", message: "Flashcard: \(selectedFlashcard.cardTitle) was added to your deck")
         
-        do {
-            try dataPersistence.createItem(selectedFlashcard)
-        } catch{
-            showAlert(title: "SAVING ERROR", message: "Error: \(error)")
+        
+        if dataPersistence.hasItemBeenSaved(selectedFlashcard){
+            showAlert(title: "Dupicated Flashcards", message: "You can not add duplicate flash cards")
+        } else {
+            do {
+                // save to documents directory
+                try dataPersistence.createItem(selectedFlashcard)
+                showAlert(title: "Item was added", message: "Flashcard: \(selectedFlashcard.cardTitle) was added to your deck")
+            } catch {
+                showAlert(title: "Saving error", message: "Error: \(error)")
+            }
         }
     }
 }
