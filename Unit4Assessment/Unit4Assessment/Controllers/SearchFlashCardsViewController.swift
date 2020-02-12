@@ -16,6 +16,7 @@ class SearchFlashCardsViewController: UIViewController {
     let searchFlashCardsView = SearchFlashCardsView()
     
     private lazy var collectionView = searchFlashCardsView.collectionView
+    private lazy var searchBar = searchFlashCardsView.searchBar
     
     private var remoteFlashCards = [FlashCard](){
         didSet{
@@ -32,6 +33,8 @@ class SearchFlashCardsViewController: UIViewController {
         }
     }
     
+    private var searchFlashCards = [FlashCard]()
+    
     override func loadView() {
         view = searchFlashCardsView
     }
@@ -42,6 +45,8 @@ class SearchFlashCardsViewController: UIViewController {
         collectionView.register(FlashCardCell.self, forCellWithReuseIdentifier: "remoteFlashCardCell")
         loadRemoteFlashCards()
         view.backgroundColor = .systemBackground
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        self.searchFlashCardsView.addGestureRecognizer(tapGesture)
     }
     
     private func loadRemoteFlashCards(){
@@ -53,6 +58,7 @@ class SearchFlashCardsViewController: UIViewController {
                 }
             case .success(let flashCards):
                 self?.remoteFlashCards = flashCards
+                self?.searchFlashCards = flashCards
             }
         }
     }
@@ -60,6 +66,26 @@ class SearchFlashCardsViewController: UIViewController {
     private func delegatesAndDataSources(){
         collectionView.dataSource = self
         collectionView.delegate = self
+        searchBar.delegate = self
+    }
+    
+    @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer){
+        view.endEditing(true)
+    }
+    
+    private func filterFlashCards(for searchText: String){
+        guard !searchText.isEmpty else {
+            return
+        }
+        remoteFlashCards =  searchFlashCards.filter{$0.cardTitle.lowercased().contains(searchText.lowercased())}
+    }
+}
+
+extension SearchFlashCardsViewController:UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        guard let searchTest = searchBar.text else { return }
+        filterFlashCards(for: searchTest)
     }
 }
 

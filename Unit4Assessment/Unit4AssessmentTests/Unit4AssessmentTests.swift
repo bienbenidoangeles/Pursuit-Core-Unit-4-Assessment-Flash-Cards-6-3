@@ -74,7 +74,7 @@ class Unit4AssessmentTests: XCTestCase {
         //act
         RemoteFlashCardsHelper.getRemoteFlashCards(completion: { (result) in
                 switch result{
-                case .failure(let appError):
+                case .failure:
                     break
                 case .success(let flashCards):
                     flashCards1 = flashCards

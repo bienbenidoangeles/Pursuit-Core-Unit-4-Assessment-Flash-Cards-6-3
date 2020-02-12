@@ -15,15 +15,24 @@ class FlashCardsViewController: UIViewController {
     
     let flashCardsView = FlashCardsView()
     lazy var collectionView = flashCardsView.collectionView
+    lazy var searchBar = flashCardsView.searchBar
     
     var flashCards = [FlashCard](){
         didSet{
             collectionView.reloadData()
             if flashCards.isEmpty{
-                collectionView.backgroundView = EmptyView(title: "Flash Cards", message: "No flash cards have been saved. Why not browse some from the net?")
+                collectionView.backgroundView = EmptyView(title: "Flash Cards", message: "No flash cards have been found. Why not browse some from the net?")
             } else {
                 collectionView.backgroundView = nil
             }
+        }
+    }
+    
+    var searchFlashCards = [FlashCard]()
+    
+    var searchQuery = ""{
+        didSet{
+            flashCards = searchFlashCards.filter{$0.cardTitle.lowercased().contains(searchQuery.lowercased())}
         }
     }
     
@@ -37,21 +46,42 @@ class FlashCardsViewController: UIViewController {
         delegateAndDataSources()
         collectionView.register(FlashCardCell.self, forCellWithReuseIdentifier: "FlashCardCell")
         view.backgroundColor = .systemBackground
-        loadSavedArticles()
+        loadSavedFlashCards()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        self.flashCardsView.addGestureRecognizer(tapGesture)
     }
     
     func delegateAndDataSources(){
         collectionView.delegate = self
         collectionView.dataSource = self
+        searchBar.delegate = self
     }
     
-    func loadSavedArticles(){
+    private func loadSavedFlashCards(){
         do{
             flashCards = try dataPersistence.loadItems()
+            searchFlashCards = try dataPersistence.loadItems()
             //print(flashCards)
         } catch {
             showAlert(title: "Loading error", message: "Error: \(error)")
         }
+    }
+    
+    @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer){
+        view.endEditing(true)
+    }}
+
+extension FlashCardsViewController: UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+         guard !searchText.isEmpty else {
+            loadSavedFlashCards()
+            return
+        }
+            searchQuery = searchText
     }
 }
 
@@ -121,10 +151,10 @@ extension FlashCardsViewController: FlashCardButtonDelegate{
 
 extension FlashCardsViewController: DataPersistenceDelegate{
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        loadSavedArticles()
+        loadSavedFlashCards()
     }
     
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        loadSavedArticles()
+        loadSavedFlashCards()
     }
 }
